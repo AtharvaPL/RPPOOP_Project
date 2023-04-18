@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a book</title>
+    <style>
+        .heading h1{
+            margin-top: 10px;
+
+            text-align: center;
+            
+        }
+
+        .add_heading h2{
+            text-align: center;
+        }
+
+        
+        .add_a_book{
+            margin-top: 10px;
+            
+            width: 200px;
+            padding: 5px;
+            border: 2px solid black;
+            border-radius : 10px;
+           
+           
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+            
+        
+            
+        }
+
+        .add_a_user{
+            margin-top: 10px;
+            
+            width: 200px;
+            padding: 5px;
+            border: 2px solid black;
+            border-radius : 10px;
+           
+           
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+            
+        
+            
+        }
+
+        .book_issue{
+            margin-top: 10px;
+            padding: 5px;
+            width: 200px;
+           
+            border: 2px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+           
+           
+            
+        }
+
+        .book_return{
+            margin-top: 10px;
+            padding: 5px;
+            width: 200px;
+           
+            border: 2px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+            
+            
+        }
+       
+
+        
+        .serach_book{
+            margin-top: 10px;
+            padding: 5px;
+            width: 200px;
+           
+            border: 2px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            cursor: pointer;
+           
+            
+            
+        }
+        .log_out button{
+            width: 100px;
+            height: 25px;
+            background-color: rgb(12, 239, 12);
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px ;
+            float: right;
+            cursor: pointer;
+        }
+
+        .container{
+            display: grid;
+            
+            grid-template-columns:400px 300px 300px;
+           
+
+            grid-column-gap: 200px;
+            /* grid-row-gap: 10px; */
+            
+           
+        }
+
+        .container2{
+            display: grid;
+            
+            grid-template-columns:400px 300px 300px;
+           
+
+            grid-column-gap: 200px;
+
+        }
+
+        .save_book button{
+            display: inline-block;
+            width: 100px;
+            height: 25px;
+            background-color: green;
+            justify-content: center;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px ;
+            cursor: pointer;
+            display: grid;
+            
+            margin-top: 10px;
+            margin-left:0px;
+           
+           
+
+        }
+       
+       
+
+
+       
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="log_out">
+        <a href="login.html">
+            <button>Log out</button>
+        </a>
+    </div>
+
+    <div class="heading">
+        <h1>Library Management System</h1>
+    </div>
+
+    <div class="add_heading">
+        <br>
+        <h2>Add a Book</h2>
+    </div>
+
+   
+
+   
+
+   
+    
+   
+
+    <div class="container">
+        <div class="add_a_book" id="horizontal">
+            <a href="add_a_book.html">
+                Add a Book
+            </a>
+           
+        </div>
+        <div class="accession_no" id="horizontal">
+            Accccession Number
+            <br>
+            <input type="number" name="" id="">
+        </div>
+
+        <div class="cupboard_no" id="horizontal">
+            Cupboard Number
+            <br>
+            <input type="number" name="" id="">
+        </div>
+
+        <div class="add_a_user" id="horizontal">
+            <a href="add_user.html">
+                Add User
+            </a>
+        </div>
+
+        <div class="book_title" id="horizontal">
+            Book Title
+            <br>
+            <input type="text" name="" id="">
+        </div>
+
+        <div class="author_name" id="horizontal">
+            Author Name
+            <br>
+            <input type="text" name="" id="">
+        </div>
+
+        <div class="book_issue" id="horizontal">
+            <a href="issue_book.html">
+                Book Issue
+            </a>
+        </div>
+
+        <div class="publisher" id="horizontal">
+            Publisher
+            <br>
+            <input type="text" name="" id="">
+
+        </div>
+
+       
+
+        
+
+    </div>
+
+    <div class="container2">
+        <div class="book_return" id="horizontal">
+            Book Return
+        </div>
+
+        <div class="save_book">
+            <button>Save Book</button>
+        </div>
+
+    </div>
+
+    <!-- <div class="book_return" id="horizontal">
+        Book Return
+    </div> -->
+
+    
+
+    <div class="serach_book" id="horizontal">
+        <a href="search_book.html">
+            Search Books
+        </a>
+    </div>
+
+    <!-- <div class="save_book">
+        <button>Save Book</button>
+    </div> -->
+
+   
+
+
+    
+</body>
+</html>
