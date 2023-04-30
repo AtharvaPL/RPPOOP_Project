@@ -182,8 +182,7 @@
 
    
     
-   
-
+   <form action="add_a_book" method="post">
     <div class="container">
         <div class="add_a_book" id="horizontal">
             <a href="add_a_book">
@@ -194,13 +193,13 @@
         <div class="accession_no" id="horizontal">
             Accccession Number
             <br>
-            <input type="number" name="" id="">
+            <input type="number" name="bookcode" id="">
         </div>
 
         <div class="cupboard_no" id="horizontal">
             Cupboard Number
             <br>
-            <input type="number" name="" id="">
+            <input type="number" name="cupboardNo" id="">
         </div>
 
         <div class="add_a_user" id="horizontal">
@@ -212,13 +211,13 @@
         <div class="book_title" id="horizontal">
             Book Title
             <br>
-            <input type="text" name="" id="name">
+            <input type="text" name="name" id="name">
         </div>
 
         <div class="author_name" id="horizontal">
             Author Name
             <br>
-            <input type="text" name="" id="">
+            <input type="text" name="author" id="">
         </div>
 
         <div class="book_issue" id="horizontal">
@@ -234,7 +233,12 @@
 
         </div>
 
-       
+        <div class="quantity" id="horizontal">
+            Quantity
+            <br>
+            <input type="number" name="quantity" id="">
+
+        </div>
 
         
 
@@ -246,7 +250,8 @@
         </div>
 
         <div class="save_book">
-            <button>Save Book</button>
+            <!-- <button onclick="add_book">Save Book</button> -->
+            <input type="submit"/>
         </div>
 
  
@@ -269,6 +274,9 @@
     </div> -->
 
 
+   </form>
+
+    
     
 </body>
 </html>
