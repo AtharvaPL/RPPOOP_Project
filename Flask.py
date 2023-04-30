@@ -152,6 +152,14 @@ def issue():
         IssueBook_byName(title)
     return render_template("issue_book.html")
 
+@app.route("/book_return",methods=["GET", "POST"])
+def return_book():
+    if request.method == "POST": # type: ignore
+        pass
+        # title = request.form.get("title") # type: ignore
+        # IssueBook_byName(title)
+    return render_template("issue_book.html")
+
 @app.route("/page1",methods=["GET", "POST"])
 def page1():
     return render_template("page1.html")
