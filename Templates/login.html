@@ -34,41 +34,56 @@
     </style>
 </head>
 <body>
-   <form  action="page1" method="post">
-    <div class="topic">
-        <h1>Library Management System </h1>
-    </div>
 
-    <div class="container">
-        <br>
-        <br>
-        <br>
-        <div id="login">
-            User Name
-            <br>
-                <input type="text" name="user_id"/>
-            <br>
-            <br>
-            Password
-            <br>
-                <input type="password" name="Password" />
+    <form action="{{ url_for('login') }}" method="post">
+        {{msg}}
+        <div class="topic">
+            <h1>Library Management System</h1>
+        </div>
+    
+        <div class="container">
             <br>
             <br>
-
-            <div class="save">
-                <a href="page1">
-                    <!-- <button>Log in</button> -->
-                    <input type="submit" value="Login"/>
+            <br>
+            <div id="login">
+                User Name
+                <br>
+                    <input type="text" name="username"required>
+    
+    
+    
                 
-                </a>
-                
+                <br>
+                <br>
+                Password
+                <br>
+                    <input type="password" name="password" required>
+                <br>
+                <br>
+    
+                <div class="save">
+                    <button>Log in</button>
+                    
+                        
+                    
+    
+                    
+                        
+                    
+                    
+                </div>
+               
+    
             </div>
            
-
         </div>
-       
-    </div>
-   </form>
+        
+    
+
+
+
+    </form>
+
     
     
 </body>
