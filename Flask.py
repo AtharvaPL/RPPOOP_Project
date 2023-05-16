@@ -1,7 +1,10 @@
-from flask import Flask,render_template,request,session
+from flask import Flask, render_template, request, redirect, url_for, session,flash
+from flask_mysqldb import MySQL
+import MySQLdb.cursors
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
+from datetime import date
 
 app = Flask(__name__)
 
@@ -60,8 +63,12 @@ def IssueBook_byName(name):
         SET quantity = {}
         WHERE Name='{}';""".format(result[0][3]-1,name)
         Queries(connection,Update)
+
+            # User_Query = """INSERT INTO user VALUES('{}',{},)"""
     else:
         print("Book not available")
+
+
 
 def IssueBook_byBookCode(bookcode):
     result = find_byBookCode(bookcode)
@@ -84,7 +91,7 @@ def AddBook(name,author,cupboardNo,quantity,isavailable,bookcode):
 
 def returnbook_byName(name):
     result = find_byName(name)
-    if(result[0][3]==0):
+    if(result[0][-2]==0):
         Update = """UPDATE DATA
         SET isavailable=1
         WHERE name='{}';""".format(name)
@@ -118,11 +125,27 @@ def read(connection,query):
 
 
 
-@app.route("/login",methods=["GET", "POST"])
+# @app.route("/login",methods=["GET", "POST"])
+# def login():
+#         return render_template("login.html")
+
+@app.route('/login',methods=['GET','POST'])
 def login():
-        return render_template("login.html")
-
-
+    msg=''
+    if request.method=='POST' and 'username' in request.form and 'password' in request.form:
+        UID=request.form['username']
+        pwd=request.form['password']
+        cur=connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.execute("select * from login where UserId=%s and Password=%s",(UID,pwd))
+        account=cur.fetchone()
+        if account:
+            msg='Logged in Successfully'
+            #After login if you want to call a new page then use the below line
+            return render_template("page1.html")
+        else:
+            msg='Wrong username or password!'
+            
+    return render_template("login.html",msg=msg)
 
 
 @app.route("/add_a_book",methods=["GET", "POST"])
@@ -149,16 +172,16 @@ def add_user():
 def issue():
     if request.method == "POST": # type: ignore
         title = request.form.get("title") # type: ignore
-        IssueBook_byName(title)
+        MIS = request.form.get("MIS") # type: ignore
+        IssueBook_byName(title,MIS)
     return render_template("issue_book.html")
 
 @app.route("/book_return",methods=["GET", "POST"])
 def return_book():
-    if request.method == "POST": # type: ignore
-        pass
-        # title = request.form.get("title") # type: ignore
-        # IssueBook_byName(title)
-    return render_template("issue_book.html")
+    if request.method=='POST':
+        name=request.form.get("bookname")
+        returnbook_byName(name)
+    return render_template('book_return.html')
 
 @app.route("/page1",methods=["GET", "POST"])
 def page1():
@@ -167,18 +190,20 @@ def page1():
 @app.route("/search_book",methods=["GET", "POST"])
 def search_book():
     if request.method=="POST": # type: ignore
-        name=request.form.get("name") # type: ignore
-        Select = """SELECT * FROM data
-        Where name LIKE '%{}%'""".format(name)
-        Queries(connection,Select)
-        info=read(connection,Select)
-        df = pd.DataFrame()
-        for i in info:
-            df1 = pd.DataFrame(list(i)).T
-            df = pd.concat([df,df1])
-        df.to_html('templates/search_book.html')
-        return render_template("search_book.html",info=df)
+        case = request.form.get("for_search")
+        query=request.form.get("query") # type: ignore
+        if(case=="title"):
+            Select = """SELECT * FROM data
+            Where name LIKE '%{}%'""".format(query)
+        else:
+            Select = """SELECT * FROM data
+            Where author LIKE '%{}%'""".format(query)
+        cursor = connection.cursor()
+        cursor.execute(Select)
+        results = cursor.fetchall()
+        return render_template("search_book.html", results=results)
     else:
         return render_template("search_book.html")
+
 
 app.run(debug=True)
