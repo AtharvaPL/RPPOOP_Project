@@ -51,57 +51,99 @@ def find_byBookCode(bookcode):
     return result
 
 
-def IssueBook_byName(name):
-    result = find_byName(name)
-    if(result[0][-2]):
-        if(result[0][3]==1):
-            Update = """UPDATE DATA
-            SET isavailable=0
-            WHERE Name='{}';""".format(name)
-            Queries(connection,Update)
-        Update = """UPDATE data
-        SET quantity = {}
-        WHERE Name='{}';""".format(result[0][3]-1,name)
-        Queries(connection,Update)
+# def IssueBook_byName(name,mis):
+#     result = find_byName(name)
+#     if(result[0][-2]):
+#         if(result[0][3]==1):
+#             Update = """UPDATE DATA
+#             SET isavailable=0
+#             WHERE Name='{}';""".format(name)
+#             Queries(connection,Update)
+#         Update = """UPDATE data
+#         SET quantity = {}
+#         WHERE Name='{}';""".format(result[0][3]-1,name)
+#         Queries(connection,Update)
 
-            # User_Query = """INSERT INTO user VALUES('{}',{},)"""
+#             # User_Query = """INSERT INTO user VALUES('{}',{},)"""
+#     else:
+#         print("Book not available")
+
+
+
+def IssueBook_byBookCode(bookcode,mis):
+    # userdb = get_user_db(mis)
+    find = "SELECT * FROM user WHERE mis={}".format(mis)
+    userdb = read(connection,find)
+    if(userdb):
+        if(userdb[0][2] and userdb[0][4] and userdb[0][6]):
+            print("You cannot issue more books, please first return books")
+        else:
+            if((userdb[0][3]!=None and (userdb[0][3]-date.today()).days<-30) or (userdb[0][5]!=None and (userdb[0][5]-date.today()).days<-30) or (userdb[0][7]!=None and (userdb[0][7]-date.today()).days<-30)):
+                fine = 0
+                if(userdb[0][3] and (userdb[0][3]-date.today()).days<-30):
+                    fine = fine + ((date.today()-userdb[0][3]).days-30)*100
+                if(userdb[0][5] and (userdb[0][5]-date.today()).days<-30):
+                    fine = fine + ((date.today()-userdb[0][5]).days-30)*100
+                if(userdb[0][7] and (userdb[0][7]-date.today()).days<-30):
+                    fine = fine + ((date.today()-userdb[0][7]).days-30)*100
+                print("You have exceeded your return deadline, please first return books and your fine is {}".format(fine))
+            else:
+                if((userdb[0][2]!=None and userdb[0][2]==bookcode) or (userdb[0][4]!=None and userdb[0][4]==bookcode) or (userdb[0][6]!=None and userdb[0][6]==bookcode)):
+                    print("You have already issued this book, cannot reissue the same book again")
+                else:
+                    bookdb = find_byBookCode(bookcode)
+                    if(bookdb[0][-2]):
+                        if(bookdb[0][3]==1):
+                            Update = """UPDATE DATA
+                            SET isavailable=0
+                            WHERE bookcode={};""".format(bookcode)
+                            Queries(connection,Update)
+                        Update = """UPDATE data
+                        SET quantity = {}
+                        WHERE bookcode={};""".format(bookdb[0][3]-1,bookcode)
+                        Queries(connection,Update)
+                        if(userdb[0][2]==None):
+                            Update = """UPDATE user
+                            SET Book1 = {},
+                            Issue1 = '{}'
+                            WHERE MIS = {};""".format(bookcode,date.today(),mis)
+                            print(date.today())
+                        elif(userdb[0][4]==None):
+                            Update = """UPDATE user
+                            SET Book2 = {},
+                            Issue2 = '{}'
+                            WHERE MIS = {};""".format(bookcode,date.today(),mis)
+                        else:
+                            Update = """UPDATE user
+                            SET Book3 = {},
+                            Issue3 = '{}'
+                            WHERE MIS = {};""".format(bookcode,date.today(),mis)
+                        Queries(connection,Update)
+                    else:
+                        print("Book not available")
     else:
-        print("Book not available")
+        print("User not found, please register first")
 
-
-
-def IssueBook_byBookCode(bookcode):
-    result = find_byBookCode(bookcode)
-    if(result[0][-2]):
-        if(result[0][3]==1):
-            Update = """UPDATE DATA
-            SET isavailable=0
-            WHERE bookcode={};""".format(bookcode)
-            Queries(connection,Update)
-        Update = """UPDATE data
-        SET quantity = {}
-        WHERE bookcode={};""".format(result[0][3]-1,bookcode)
-        Queries(connection,Update)
-    else:
-        print("Book not available")
 
 def AddBook(name,author,cupboardNo,quantity,isavailable,bookcode):
     Insert = "INSERT INTO data VALUES('{}','{}',{},{},{},{})".format(name,author,cupboardNo,quantity,isavailable,bookcode)
     Queries(connection,Insert)
 
-def returnbook_byName(name):
-    result = find_byName(name)
-    if(result[0][-2]==0):
-        Update = """UPDATE DATA
-        SET isavailable=1
-        WHERE name='{}';""".format(name)
-        Queries(connection,Update)
-    Update = """UPDATE data
-    SET quantity = {}
-    WHERE name='{}';""".format(result[0][3]+1,name)
-    Queries(connection,Update)   
+# def returnbook_byName(name):
+#     result = find_byName(name)
+#     if(result[0][-2]==0):
+#         Update = """UPDATE DATA
+#         SET isavailable=1
+#         WHERE name='{}';""".format(name)
+#         Queries(connection,Update)
+#     Update = """UPDATE data
+#     SET quantity = {}
+#     WHERE name='{}';""".format(result[0][3]+1,name)
+#     Queries(connection,Update)   
 
-def returnbook_byBookCode(bookcode):
+def returnbook_byBookCode(bookcode,mis):
+    find = "SELECT * FROM user WHERE mis={}".format(mis)
+    userdb = read(connection,find)
     result = find_byBookCode(bookcode)
     if(result[0][3]==0):
         Update = """UPDATE DATA
@@ -111,6 +153,31 @@ def returnbook_byBookCode(bookcode):
     Update = """UPDATE data
     SET quantity = {}
     WHERE bookcode={};""".format(result[0][3]+1,bookcode)
+    Queries(connection,Update)
+    fine=0
+    if(userdb[0][2] and userdb[0][2]==bookcode):
+        if((userdb[0][3]-date.today()).days<-30):
+            fine = fine + ((date.today()-userdb[0][3]).days-30)*100
+        Update="""Update user
+        SET Book1=NULL,
+        Issue1=NULL
+        WHERE MIS={};""".format(mis)
+    elif(userdb[0][4] and userdb[0][4]==bookcode):
+        if((userdb[0][5]-date.today()).days<-30):
+            fine = fine + ((date.today()-userdb[0][5]).days-30)*100
+        Update="""Update user
+        SET Book2=NULL,
+        Issue2=NULL
+        WHERE MIS={};""".format(mis)
+    else:
+        if((userdb[0][7]-date.today()).days<-30):
+            fine = fine + ((date.today()-userdb[0][7]).days-30)*100
+        Update="""Update user
+        SET Book3=NULL,
+        Issue3=NULL
+        WHERE MIS={};""".format(mis)
+    if(fine):
+        print("Please pay a fine of {}".format(fine))
     Queries(connection,Update)
 
 def read(connection,query):
@@ -123,6 +190,9 @@ def read(connection,query):
     except:
         pass 
 
+def add_user_func(connection,name,mis):
+    Query = """INSERT INTO user VALUES('{}',{},NULL,NULL,NULL,NULL,NULL,NULL)""".format(name,mis)
+    Queries(connection,Query)
 
 
 # @app.route("/login",methods=["GET", "POST"])
@@ -166,21 +236,30 @@ def add_a_book():
 
 @app.route("/add_user",methods=["GET", "POST"])
 def add_user():
+    if request.method == "POST":
+        name = request.form.get("name") # type: ignore
+        mis = request.form.get("mis") # type: ignore
+        add_user_func(connection,name,mis)
     return render_template("add_user.html")
 
 @app.route("/issue_book",methods=["GET", "POST"])
 def issue():
     if request.method == "POST": # type: ignore
-        title = request.form.get("title") # type: ignore
-        MIS = request.form.get("MIS") # type: ignore
-        IssueBook_byName(title,MIS)
+        # title = request.form.get("title") # type: ignore
+        # MIS = request.form.get("MIS") # type: ignore
+        # IssueBook_byName(title,MIS)
+        bookcode = request.form.get("bookcode") # type: ignore
+        mis = request.form.get("MIS") # type: ignore
+        IssueBook_byBookCode(bookcode,mis)
     return render_template("issue_book.html")
 
 @app.route("/book_return",methods=["GET", "POST"])
 def return_book():
     if request.method=='POST':
-        name=request.form.get("bookname")
-        returnbook_byName(name)
+        bookcode = request.form.get("bookcode") # type: ignore
+        # mis = request.form.get("MIS") # type: ignore
+        mis=112103079
+        returnbook_byBookCode(bookcode,mis)
     return render_template('book_return.html')
 
 @app.route("/page1",methods=["GET", "POST"])
