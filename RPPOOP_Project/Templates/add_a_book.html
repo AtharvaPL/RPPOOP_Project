@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a book</title>
+    <style>
+        .image img{
+            position: relative;
+            width:100%;
+            height: 850px;
+            /* margin: 10px; */
+            padding: 4px;
+
+        }
+        .heading h2{
+            position: absolute;
+            top: 2%;
+            margin-top: 20px;
+            right:35%;
+            font-size: 2.5em;
+
+            text-align: center;   
+        }
+
+        .add_heading h2{
+            position: absolute;
+            top: 10%;
+            margin-top: 20px;
+            right:45%;
+            
+
+            text-align: center;
+            color: rgb(236, 12, 12);
+            
+        }
+
+        
+        .add_a_book{
+            position: absolute;
+            /* margin-top: 30px; */
+            top: 150px;
+            right: 87%;
+           
+            
+            width: 200px;
+            padding: 5px;
+            border: 3px solid black;
+            border-radius : 10px;
+           
+           
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;  
+        }
+
+        .add_a_user{
+            position: absolute;
+            /* margin-top: 10px; */
+            top: 200px;
+            right: 87%;
+            
+            width: 200px;
+            padding: 5px;
+            border: 3px solid black;
+            border-radius : 10px;
+           
+           
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;    
+        }
+
+        .book_issue{
+            position: absolute;
+            /* margin-top: 10px; */
+            top: 250px;
+            right: 87%;
+            padding: 5px;
+            width: 200px;
+           
+            border: 3px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            justify-content: center;
+            cursor: pointer; 
+        }
+
+        .book_return{
+            position: absolute;
+            /* margin-top: 10px; */
+            top: 300px;
+            right: 87%;
+            padding: 5px;
+            width: 200px;
+           
+            border: 3px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+       
+
+        
+        .search_book{
+            position: absolute;
+            /* margin-top: 10px; */
+            top: 350px;
+            right: 87%;
+            padding: 5px;
+            width: 200px;
+           
+            border: 3px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            cursor: pointer;
+        }
+        .log_out button{
+            position: absolute;
+            width: 100px;
+            height: 25px;
+            background-color: rgb(12, 239, 12);
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px ;
+            float: right;
+            cursor: pointer;
+            top: 20px;
+            left: 94%;
+        }
+
+        .container{
+            display: grid;
+            
+            grid-template-columns:400px 300px 300px;
+           
+
+            grid-column-gap: 200px;
+            /* grid-row-gap: 10px; */
+            
+           
+        }
+
+        .container2{
+            display: grid;
+            
+            grid-template-columns:400px 300px 300px;
+           
+
+            grid-column-gap: 200px;
+
+        }
+
+        .save_book button{
+            display: inline-block;
+            width: 100px;
+            height: 25px;
+            background-color: green;
+            justify-content: center;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px ;
+            cursor: pointer;
+            display: grid;
+            
+            margin-top: 10px;
+            margin-left:0px;
+           
+           
+
+        }
+        input{
+            border: 2px solid;
+        }
+        
+        .accession_no{
+            position: absolute;
+            top: 190px;
+            right: 50%;
+            
+
+        }
+        .cupboard_no{
+            position: absolute;
+            top: 190px;
+            right: 30%;
+           
+
+
+        }
+        .book_title{
+            position: absolute;
+            top: 240px;
+            right: 50%;
+           
+
+
+        }
+
+        .author_name{
+            position: absolute;
+            top: 240px;
+            right: 30%;
+            
+
+        }
+
+        .publisher{
+            position: absolute;
+            top: 290px;
+            right: 50%;
+            
+
+        }
+        .quantity{
+            position: absolute;
+            top: 290px;
+            right: 30%;
+            
+
+        }
+
+        .save_book{
+            position: absolute;
+            top: 340px;
+            right: 40%;
+            
+
+        }
+       
+
+
+       
+
+        
+    </style>
+</head>
+<body>
+    <div class="image">
+        <img src="plain_img.jpg" alt="">
+
+    </div>
+
+    <div class="box">
+    <div class="log_out">
+        <a href="login">
+            <button>Log out</button>
+        </a>
+    </div>
+    
+
+    <div class="heading">
+        <h2>Library Management System</h2>
+    </div>
+
+    <div class="add_heading">
+        <br>
+        <h2>Add a Book</h2>
+    </div>
+
+   
+
+   
+
+   
+    
+   <form action="add_a_book" method="post">
+    <div class="container">
+        <div class="add_a_book" id="horizontal">
+            <a href="add_a_book">
+                Add a Book
+            </a>
+           
+        </div>
+        <div class="accession_no" id="horizontal">
+            Accccession Number
+            <br>
+            <input type="number" name="bookcode" id="">
+        </div>
+
+        <div class="cupboard_no" id="horizontal">
+            Cupboard Number
+            <br>
+            <input type="number" name="cupboardNo" id="">
+        </div>
+
+        <div class="add_a_user" id="horizontal">
+            <a href="add_user">
+                Add User
+            </a>
+        </div>
+
+        <div class="book_title" id="horizontal">
+            Book Title
+            <br>
+            <input type="text" name="name" id="name">
+        </div>
+
+        <div class="author_name" id="horizontal">
+            Author Name
+            <br>
+            <input type="text" name="author" id="">
+        </div>
+
+        <div class="book_issue" id="horizontal">
+            <a href="issue_book">
+                Book Issue
+            </a>
+        </div>
+
+        <div class="publisher" id="horizontal">
+            Publisher
+            <br>
+            <input type="text" name="" id="">
+
+        </div>
+
+        <div class="quantity" id="horizontal">
+            Quantity
+            <br>
+            <input type="number" name="quantity" id="">
+
+        </div>
+
+        
+
+    </div>
+
+    <div class="container2">
+        <div class="book_return" id="horizontal">
+            <a href="book_return">
+                Book Return    
+            </a>
+        </div>
+
+        <div class="save_book">
+            <!-- <button onclick="add_book">Save Book</button> -->
+            <input type="submit"/>
+        </div>
+
+ 
+    </div>
+
+    <!-- <div class="book_return" id="horizontal">
+        Book Return
+    </div> -->
+
+    
+
+    <div class="search_book" id="horizontal">
+        <a href="search_book">
+            Search Books
+        </a>
+    </div>
+
+    <!-- <div class="save_book">
+        <button>Save Book</button>
+    </div> -->
+
+
+   </form>
+
+    
+    
+</body>
+</html>

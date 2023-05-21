@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        .image img{
+            position: relative;
+            width:100%;
+            height: 850px;
+            /* margin: 10px; */
+            padding: 4px;
+        }
+        .container{
+            position:absolute;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            top: 30%;
+            right: 45%;
+        }
+        .save button{
+            width: 100px;
+            height: 25px;
+            background-color:blue;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 10px;
+            cursor: pointer;
+            top: 45px;
+            right: 40%;
+        }
+
+        .topic h2{
+            text-align: center;
+            margin-top:5px;
+            position: absolute;
+            top: 20%;
+            right: 35%;
+            /* font-weight: 800; */
+            font-size: 2.5em;
+           
+            
+        }
+
+        .college_name h1{
+            text-align: center;
+            margin-top: 5px;
+            position: absolute;
+            top: 5%;
+            right: 19%;
+            font-weight: 800;
+            font-size: 5em;
+            color: orangered;
+            
+
+            
+        }
+
+        /* .username_textbox{
+            height: 100px;
+        } */
+        input{
+            border: 3px solid;
+        }        
+    </style>
+</head>
+<body>
+
+    <form action="{{ url_for('login') }}" method="post">
+       
+
+        <div class="image">
+            {{msg}}
+            <img src="front_image.jpg" alt="">
+            <div class="college_name">
+                <h1>COEP Technological University</h1>
+            </div>
+            <div class="topic">
+                <h2>Library Management System</h2>
+            </div>
+
+            <div class="container">
+                <br>
+                <br>
+                <br>
+                <div id="login ">
+                    User Name
+                    <br>
+                        <input type="text" name="username"  required>
+                                   
+                    <br>
+                    <br>
+                    Password
+                    <br>
+                        <input type="password"  name="password"  required>
+                    <br>
+                    <br>
+        
+                    <div class="save">
+                        <button>Log in</button>
+      
+                    </div>
+                   
+        
+                </div>
+
+        </div>
+        </div>
+    </form>
+</body>
+</html>
