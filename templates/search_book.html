@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Book</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .image img{
+            position: relative;
+            width:100%;
+            height: 850px;
+            /* margin: 10px; */
+            padding: 4px;
+
+        }
+        .container h2 {
+            position: absolute;
+            top: 2%;
+            margin-top: 20px;
+            right:35%;
+            font-size: 2.5em;
+
+            text-align: center;
+        }
+
+        .add_heading h2 {
+            position: absolute;
+            top: 10%;
+            margin-top: 20px;
+            right:45%; 
+            
+
+            text-align: center;
+            color: rgb(236, 12, 12);
+        }
+
+
+       
+
+        .save_button Submit{
+            position: absolute;
+            display: inline-block;
+            width: 100px;
+            height: 25px;
+            background-color:rgb(11, 172, 11);
+            justify-content: center;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+            display: grid;
+
+            margin-top: 10px;
+            margin-left: 0px;
+
+
+
+        }
+
+        .add_a_book{
+            position: absolute;
+            /* margin-top: 30px; */
+            top: 150px;
+            right: 88%;
+           
+            
+            width: 200px;
+            padding: 5px;
+            border: 3px solid black;
+            border-radius : 10px;
+           
+           
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+            
+           
+           
+            
+        
+            
+        }
+
+        .add_a_user{
+            position: absolute;
+            /* margin-top: 10px; */
+            top: 200px;
+            right: 88%;
+            
+            width: 200px;
+            padding: 5px;
+            border: 3px solid black;
+            border-radius : 10px;
+           
+           
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+            
+        
+            
+           
+            
+        
+            
+        }
+
+        .book_issue{
+            position: absolute;
+            /* margin-top: 10px; */
+            top: 250px;
+            right: 88%;
+            padding: 5px;
+            width: 200px;
+           
+            border: 3px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+           
+           
+            
+        }
+
+        .book_return{
+            position: absolute;
+            /* margin-top: 10px; */
+            top: 300px;
+            right: 88%;
+            padding: 5px;
+            width: 200px;
+           
+            border: 3px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+            
+            
+        }
+       
+
+        
+        .serach_book{
+            position: absolute;
+            /* margin-top: 10px; */
+            top: 350px;
+            right: 88%;
+            padding: 5px;
+            width: 200px;
+           
+            border: 3px solid black;
+            border-radius : 10px;
+            
+            text-align: center;
+            cursor: pointer;
+           
+           
+            
+            
+        }
+
+        .log_out button{
+            position: absolute;
+            width: 100px;
+            height: 25px;
+            background-color: rgb(12, 239, 12);
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px ;
+            float: right;
+            cursor: pointer;
+            top: 15px;
+            left: 94%;
+        }
+
+
+        .container1 {
+            display: grid;
+
+            grid-template-columns:700px  700px;
+
+
+            grid-column-gap: 200px;
+
+        }
+        .container2{
+            display: grid;
+
+            grid-template-columns:600px 600px 600px ;
+
+
+            grid-column-gap: 200px;
+
+
+        }
+
+        .container3{
+            display: grid;
+
+            grid-template-columns:600px 600px 600px ;
+
+
+            grid-column-gap: 200px;
+
+
+        }
+
+
+
+        .choice1{
+            margin: 0px 200px;
+            position: absolute;
+            top: 170px;
+            right: 15%;
+            font-size: x-large;
+            
+        }
+
+        .choice2{
+            margin:0px 200px;
+            position: absolute;
+            top: 170px;
+            right: 50%;
+            font-size: x-large;
+            
+        }
+
+        .search_words{
+            position: absolute;
+            margin-top: 20px;
+            top: 210px;
+            right: 45%;
+            
+            
+
+
+        }
+        .save_button{
+            position: absolute;
+            top: 300px;
+            right: 50%;
+            
+        }
+
+        
+
+        input{
+            border: 2px solid;
+        }
+        input[type=submit]{
+            color: green;
+
+        }
+        .table{
+            position: absolute;
+            top: 500px;
+            /* right: 50%; */
+
+        }
+        .start{
+            position: absolute;
+            top: 470px;
+
+        }
+        .end{
+            position: absolute;
+            top: 470px;
+            right: 85%;
+
+        }
+
+        
+
+        
+    </style>
+</head>
+
+<body>
+    <form action="{{ url_for('search_book') }}" method="POST">
+        <div class="image">
+            <img src="plain_img.jpg" alt="">
+    
+        </div>
+        <div class="box">
+            <div class="log_out">
+                <a href="login.html">
+                    <button>Log out</button>
+                </a>
+            </div>
+        
+            <div class="container">
+                <h2>Library Management System</h2>
+            </div>
+        
+            <div class="add_heading">
+                <br>
+                <h2>Search Book</h2>
+        
+            </div>
+        
+            <div class="container1">
+               
+        
+                <div class="choice1">
+                    <input type="radio" name="for_search">Search by Title
+                </div>
+        
+        
+                <div class="choice2">
+        
+                    <input type="radio" name="for_search">Search by Author
+                </div>
+        
+        
+        
+        
+        
+            </div>
+        
+            <div class="container2">
+                <div class="add_a_book">
+                    <a href="add_a_book.html">
+                        Add a Book
+                    </a>
+            
+                </div>
+            
+                <div class="search_words">
+                    Enter your Search words
+                    <br>
+                    <input type="text" name="query" id="query">
+                </div>
+            
+        
+            </div>
+        
+            <div class="container3">
+                <div class="add_a_user">
+                    <a href="add_user.html">
+                        Add User
+                    </a>
+                </div>
+        
+        
+                <div class="save_button">
+                    <input type="submit" value="Search">
+                </div>
+            
+                
+        
+            </div>
+        
+        
+        
+        
+        
+            
+            
+        
+        
+        
+        
+            <div class="book_issue">
+                <a href="issue_book.html">
+                    Book Issue
+                </a>
+            </div>
+            <div class="book_return">
+                <a href="book_book.html">
+                    Book Return
+                   
+                </a>
+            </div>
+            <div class="serach_book">
+                <a href="search_book.html">
+                    Search Books
+                </a>
+            </div>
+    
+           
+        
+        
+        
+        
+        
+    
+
+        </div>
+        
+    </form>
+
+    <br>
+    <br>
+
+    
+	<table class="table table-bordered">
+		
+		<tbody>
+            <thead>
+                <tr>
+                    <th>Column 1</th>
+                    <th>Column 2</th>
+                    <th>Column 3</th>
+                    <th>Column 4</th>
+                    <th>Column 5</th>
+                </tr>
+            </thead>
+
+
+            
+
+            <div class="start">
+                {% for row in results %}
+
+            </div>
+			
+
+			 <tr>
+				<td>{{ row[0] }}</td>
+				<td>{{ row[1] }}</td>
+				<td>{{ row[2] }}</td>
+				<td>{{ row[3] }}</td>
+				<td>{{ row[4] }}</td>
+			</tr>
+			 <div class="end">
+                {% endfor %}
+             </div>
+		</tbody>
+	</table>
+
+    
+
+
+</body>
+
+</html>
