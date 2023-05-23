@@ -41,7 +41,7 @@
             position: absolute;
             /* margin-top: 30px; */
             top: 150px;
-            right: 87%;
+            right: 86%;
            
             
             width: 200px;
@@ -59,7 +59,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 200px;
-            right: 87%;
+            right: 86%;
             
             width: 200px;
             padding: 5px;
@@ -76,7 +76,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 250px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -92,7 +92,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 300px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -110,7 +110,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 350px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -156,7 +156,7 @@
 
         }
 
-        .save_book button{
+        .xyz{
             display: inline-block;
             width: 100px;
             height: 25px;
@@ -220,7 +220,7 @@
         .quantity{
             position: absolute;
             top: 290px;
-            right: 30%;
+            right: 50%;
             
 
         }
@@ -240,11 +240,16 @@
         
     </style>
 </head>
-<body>
-    <div class="image">
-        <img src="plain_img.jpg" alt="">
+<body style="background-image: url('static/plain_img.jpg');  height: 900px;
 
-    </div>
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
+    <!-- <div class="image">
+        <img src="static/plain_img.jpg" alt="">
+
+    </div> -->
 
     <div class="box">
     <div class="log_out">
@@ -278,7 +283,7 @@
            
         </div>
         <div class="accession_no" id="horizontal">
-            Accccession Number
+            Accession Number
             <br>
             <input type="number" name="bookcode" id="">
         </div>
@@ -313,12 +318,12 @@
             </a>
         </div>
 
-        <div class="publisher" id="horizontal">
+        <!-- <div class="publisher" id="horizontal">
             Publisher
             <br>
             <input type="text" name="" id="">
 
-        </div>
+        </div> -->
 
         <div class="quantity" id="horizontal">
             Quantity
@@ -340,7 +345,7 @@
 
         <div class="save_book">
             <!-- <button onclick="add_book">Save Book</button> -->
-            <input type="submit"/>
+            <input type="submit" class="xyz"/>
         </div>
 
  

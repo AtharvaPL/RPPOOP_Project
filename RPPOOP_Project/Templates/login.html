@@ -41,6 +41,7 @@
             right: 35%;
             /* font-weight: 800; */
             font-size: 2.5em;
+            color:lime;
            
             
         }
@@ -64,17 +65,41 @@
         } */
         input{
             border: 3px solid;
-        }        
+        }  
+        /* input[type="text"]{
+            color: aqua;
+        }    */
+        label{
+            color:white;
+            font-weight:900;
+            font-size:150%;
+        }
+        .img2 img{
+            position: absolute;
+            top: 29px;
+            right: 0%;
+            height: 200px;
+            width: 200px;
+
+        }
     </style>
 </head>
-<body>
+<body style="background-image: url('static/login.jpg');  height: 700px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
 
     <form action="{{ url_for('login') }}" method="post">
        
-
-        <div class="image">
+        <div class="img2">
+            <img src="static/coep_new.jpg" alt="">
+        </div>
+        <!-- <div class="image"> -->
             {{msg}}
-            <img src="front_image.jpg" alt="">
+            <!-- <img src="front_image.jpg" alt=""> -->
+          
             <div class="college_name">
                 <h1>COEP Technological University</h1>
             </div>
@@ -87,13 +112,13 @@
                 <br>
                 <br>
                 <div id="login ">
-                    User Name
+                    <label >User Name</label>
                     <br>
                         <input type="text" name="username"  required>
                                    
                     <br>
                     <br>
-                    Password
+                    <label>Password</label>
                     <br>
                         <input type="password"  name="password"  required>
                     <br>
@@ -107,7 +132,7 @@
         
                 </div>
 
-        </div>
+        <!-- </div> -->
         </div>
     </form>
 </body>

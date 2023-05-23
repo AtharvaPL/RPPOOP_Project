@@ -28,7 +28,7 @@
             position: absolute;
             top: 10%;
             margin-top: 20px;
-            right:45%;
+            right:47%;
             
 
             text-align: center;
@@ -41,7 +41,7 @@
             position: absolute;
             /* margin-top: 30px; */
             top: 150px;
-            right: 87%;
+            right: 86%;
            
             
             width: 200px;
@@ -60,7 +60,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 200px;
-            right: 87%;
+            right: 86%;
             
             width: 200px;
             padding: 5px;
@@ -77,7 +77,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 250px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -93,7 +93,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 300px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -111,7 +111,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 350px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -135,12 +135,14 @@
             left: 94%;
         }
 
-        .save_book button{
+        .xyz{
+            position:absolute;
+            right:50%;
             display: inline-block;
             width: 100px;
             height: 25px;
-            background-color:green;
-            justify-content: center;
+            background-color: green;
+            /* justify-content: center; */
             text-align: center;
             border: 2px solid black;
             border-radius: 5px ;
@@ -149,12 +151,15 @@
             
             margin-top: 10px;
             margin-left:0px;
+           
+           
+
         }
         .save_book{
             position: absolute;
             margin-top: 20px;
             top: 260px;
-            right: 54%;
+            right: 48%;
         }
         .container1{
             display: grid;
@@ -185,22 +190,22 @@
         .issue_book_to_user{
             position: absolute;
             margin-top: 20px;
-            top: 150px;
-            right: 30%;
+            top: 200px;
+            right: 45%;
 
         }
-        .issue_date{
+        /* .issue_date{
             position: absolute;
             margin-top: 20px;
             top: 200px;
             right: 50%;
 
-        }
+        } */
         .book_code{
             position: absolute;
             margin-top: 20px;
-            top: 200px;
-            right: 30%;
+            top: 150px;
+            right: 45%;
 
         }
 
@@ -219,13 +224,19 @@
         
     </style>
 </head>
-<body>
+<body style="background-image: url('static/plain_img.jpg');  height: 900px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
+    {{message}}
     <label style="color:white">{{ msg }}</label>
     <table>
-        <div class="image">
+        <!-- <div class="image">
             <img src="plain_img.jpg" alt="">
     
-        </div>
+        </div> -->
         <table class="box">
     <div class="log_out">
         <a href="login">
@@ -251,8 +262,8 @@
                
             </div>
     
-            <div class="issue_book">
-                Book code
+            <div class="book_code">
+                Accession Number
                 <br>
                 <input type="number" name="bookcode">
             </div>
@@ -277,7 +288,7 @@
             </div>
     
             <div class="save_book">
-                <input type="submit"/>
+                <input type="submit" class="xyz"/>
             </div>
     
     

@@ -40,7 +40,7 @@
             position: absolute;
             /* margin-top: 30px; */
             top: 150px;
-            right: 87%;
+            right: 86%;
            
             
             width: 200px;
@@ -58,7 +58,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 200px;
-            right: 87%;
+            right: 86%;
             
             width: 200px;
             padding: 5px;
@@ -75,7 +75,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 250px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -91,7 +91,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 300px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -109,7 +109,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 350px;
-            right: 87%;
+            right: 86%;
             padding: 5px;
             width: 200px;
            
@@ -174,29 +174,12 @@
             
         }
 
-        .save_book button{
-            display: inline-block;
-        width: 114px;
-        height: 25px;
-        background-color: green;
-        justify-content: center;
-        text-align: center;
-        border: 2px solid black;
-        border-radius: 5px ;
-        cursor: pointer;
-        display: grid;
-        
-        margin-top: 10px;
-        margin-left:0px;
-       
-       
-
-    }
+      
     .book_code{
             position: absolute;
             margin-top: 20px;
             top: 150px;
-            right: 50%;
+            right: 45%;
 
     }
 
@@ -204,14 +187,14 @@
             position: absolute;
             padding-left: 500px ;
             top: 230px;
-            right: 50%;
+            right: 45%;
         }
 
-        .save_book{
-            position: absolute;
-            margin-top: 20px;
-            top: 280px;
-            right: 53%;
+    .save_book{
+        position: absolute;
+            padding-left: 500px;
+            top: 300px;
+            right: 49%;
 
     }
 
@@ -241,16 +224,42 @@
             margin-right: 200px;
 
         } */
+        .xyz{
+            position:absolute;
+            right:-5%;
+            display: inline-block;
+            width: 100px;
+            height: 25px;
+            background-color: green;
+            /* justify-content: center; */
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px ;
+            cursor: pointer;
+            display: grid;
+            
+            margin-top: 10px;
+            margin-left:0px;
+           
+           
+
+        }
         
     </style>
 </head>
-<body>
+<body style="background-image: url('static/plain_img.jpg');  height: 900px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
+    {{message}}
     <label style="color:white">{{ msg }}</label>
     <table>
-    <div class="image">
+    <!-- <div class="image">
         <img src="plain_img.jpg" alt="">
     
-    </div>
+    </div> -->
     <div class="box">
     <div class="log_out">
         <a href="login">
@@ -285,7 +294,7 @@
             </div>
         
             <div class="book_code">
-                Book Code
+                Accession Number
                 <br>
                 <input type="text" name="bookcode" id="" required>
             </div>
@@ -301,7 +310,7 @@
             <div class="return_book_MIS">
                 MIS
                 <br>
-                <input type="text" name="mis" id="" required>
+                <input type="text" name="MIS" id="" required>
             </div>
     
     
@@ -314,7 +323,7 @@
                 </a>
             </div>
             <div class="save_book">
-                <button>Return</button>
+                <input type="submit" class="xyz">
             </div>   
         </div>
 

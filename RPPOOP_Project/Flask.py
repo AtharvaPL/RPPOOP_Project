@@ -70,13 +70,13 @@ def find_byBookCode(bookcode):
 
 
 
-def IssueBook_byBookCode(bookcode,mis):
+def IssueBook_byBookCode(bookcode,mis,msg):
     # userdb = get_user_db(mis)
     find = "SELECT * FROM user WHERE mis={}".format(mis)
     userdb = read(connection,find)
     if(userdb):
         if(userdb[0][2] and userdb[0][4] and userdb[0][6]):
-            print("You cannot issue more books, please first return books")
+            msg="You cannot issue more books, please first return books"
         else:
             if((userdb[0][3]!=None and (userdb[0][3]-date.today()).days<-30) or (userdb[0][5]!=None and (userdb[0][5]-date.today()).days<-30) or (userdb[0][7]!=None and (userdb[0][7]-date.today()).days<-30)):
                 fine = 0
@@ -86,10 +86,10 @@ def IssueBook_byBookCode(bookcode,mis):
                     fine = fine + ((date.today()-userdb[0][5]).days-30)*100
                 if(userdb[0][7] and (userdb[0][7]-date.today()).days<-30):
                     fine = fine + ((date.today()-userdb[0][7]).days-30)*100
-                print("You have exceeded your return deadline, please first return books and your fine is {}".format(fine))
+                msg="You have exceeded your return deadline, please first return books and your fine is {}".format(fine)
             else:
                 if((userdb[0][2]!=None and userdb[0][2]==bookcode) or (userdb[0][4]!=None and userdb[0][4]==bookcode) or (userdb[0][6]!=None and userdb[0][6]==bookcode)):
-                    print("You have already issued this book, cannot reissue the same book again")
+                    msg="You have already issued this book, cannot reissue the same book again"
                 else:
                     bookdb = find_byBookCode(bookcode)
                     if(bookdb[0][-2]):
@@ -120,9 +120,10 @@ def IssueBook_byBookCode(bookcode,mis):
                             WHERE MIS = {};""".format(bookcode,date.today(),mis)
                         Queries(connection,Update)
                     else:
-                        print("Book not available")
+                        msg="Book not available"
     else:
-        print("User not found, please register first")
+        msg="User not found, please register first"
+    return msg
 
 
 def AddBook(name,author,cupboardNo,quantity,isavailable,bookcode):
@@ -141,7 +142,7 @@ def AddBook(name,author,cupboardNo,quantity,isavailable,bookcode):
 #     WHERE name='{}';""".format(result[0][3]+1,name)
 #     Queries(connection,Update)   
 
-def returnbook_byBookCode(bookcode,mis):
+def returnbook_byBookCode(bookcode,mis,msg):
     find = "SELECT * FROM user WHERE mis={}".format(mis)
     userdb = read(connection,find)
     result = find_byBookCode(bookcode)
@@ -177,7 +178,7 @@ def returnbook_byBookCode(bookcode,mis):
         Issue3=NULL
         WHERE MIS={};""".format(mis)
     if(fine):
-        print("Please pay a fine of {}".format(fine))
+        msg="Please pay a fine of {}".format(fine)
     Queries(connection,Update)
 
 def read(connection,query):
@@ -250,16 +251,19 @@ def issue():
         # IssueBook_byName(title,MIS)
         bookcode = request.form.get("bookcode") # type: ignore
         mis = request.form.get("MIS") # type: ignore
-        IssueBook_byBookCode(bookcode,mis)
+        msg=""
+        msg=IssueBook_byBookCode(bookcode,mis,msg)
+        return render_template("issue_book.html",message=msg)
     return render_template("issue_book.html")
 
 @app.route("/book_return",methods=["GET", "POST"])
 def return_book():
     if request.method=='POST':
         bookcode = request.form.get("bookcode") # type: ignore
-        # mis = request.form.get("MIS") # type: ignore
-        mis=112103079
-        returnbook_byBookCode(bookcode,mis)
+        mis = request.form.get("MIS") # type: ignore
+        msg=""
+        msg = returnbook_byBookCode(bookcode,mis,msg)
+        return render_template('book_return.html',message=msg)
     return render_template('book_return.html')
 
 @app.route("/page1",methods=["GET", "POST"])
@@ -270,19 +274,22 @@ def page1():
 def search_book():
     if request.method=="POST": # type: ignore
         case = request.form.get("for_search")
+        print(case)
         query=request.form.get("query") # type: ignore
-        if(case=="title"):
+        if(case=="choice1"):
             Select = """SELECT * FROM data
             Where name LIKE '%{}%'""".format(query)
-        else:
+        elif(case=="choice2"):
             Select = """SELECT * FROM data
             Where author LIKE '%{}%'""".format(query)
+        else:
+            Select = """SELECT * FROM data
+            Where BookCode LIKE '%{}%'""".format(query)
         cursor = connection.cursor()
         cursor.execute(Select)
         results = cursor.fetchall()
         return render_template("search_book.html", results=results)
-    else:
-        return render_template("search_book.html")
+    return render_template("search_book.html")
 
 
 app.run(debug=True)

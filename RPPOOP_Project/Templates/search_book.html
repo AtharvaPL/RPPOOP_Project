@@ -42,7 +42,7 @@
             position: absolute;
             /* margin-top: 30px; */
             top: 150px;
-            right: 88%;
+            right: 87%;
            
             
             width: 200px;
@@ -60,7 +60,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 200px;
-            right: 88%;
+            right: 87%;
             
             width: 200px;
             padding: 5px;
@@ -73,28 +73,32 @@
             cursor: pointer;
         }
 
-        .save_button Submit{
-            position: absolute;
+        .xyz{
+            position:absolute;
+            right:-3%;
             display: inline-block;
             width: 100px;
             height: 25px;
-            background-color:rgb(11, 172, 11);
-            justify-content: center;
+            background-color: green;
+            /* justify-content: center; */
             text-align: center;
             border: 2px solid black;
-            border-radius: 5px;
+            border-radius: 5px ;
             cursor: pointer;
             display: grid;
-
+            
             margin-top: 10px;
-            margin-left: 0px;
+            margin-left:0px;
+           
+           
+
         }
 
         .book_issue {
             position: absolute;
             /* margin-top: 10px; */
             top: 250px;
-            right: 88%;
+            right: 87%;
             padding: 5px;
             width: 200px;
            
@@ -110,7 +114,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 300px;
-            right: 88%;
+            right: 87%;
             padding: 5px;
             width: 200px;
            
@@ -128,7 +132,7 @@
             position: absolute;
             /* margin-top: 10px; */
             top: 350px;
-            right: 88%;
+            right: 87%;
             padding: 5px;
             width: 200px;
            
@@ -190,7 +194,7 @@
             margin: 0px 200px;
             position: absolute;
             top: 170px;
-            right: 15%;
+            right: 0%;
             font-size: x-large;
             
         }
@@ -203,7 +207,14 @@
             font-size: x-large;
             
         }
-
+        .choice3{
+            margin:0px 200px;
+            position: absolute;
+            top: 170px;
+            right: 20%;
+            font-size: x-large;
+            
+        }
         .search_words{
             position: absolute;
             margin-top: 20px;
@@ -213,12 +224,14 @@
         }
         .save_button{
             position: absolute;
+            padding-left: 500px;
             top: 300px;
-            right: 50%;
-            
+            right: 49%;
         }
 
-        
+        input[type="submit"]{
+            text-decoration:black;
+        }
 
         input{
             border: 2px solid;
@@ -250,18 +263,24 @@
     </style>
 </head>
 
-<body>
+<body style="background-image: url('static/plain_img.jpg');  height: 900px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
+<div class="log_out">
+    <a href="login">
+        <button>Log out</button>
+    </a>
+</div>
     <form action="search_book" method="POST">
-        <div class="image">
+        <!-- <div class="image">
             <img src="plain_img.jpg" alt="">
     
-        </div>
+        </div> -->
         <div class="box">
-            <div class="log_out">
-                <a href="login">
-                    <button>Log out</button>
-                </a>
-            </div>
+            
         
             <div class="container">
                 <h2>Library Management System</h2>
@@ -277,15 +296,18 @@
                
         
                 <div class="choice1">
-                    <input type="radio" name="for_search">Search by Title
+                    <input type="radio" name="for_search" value="choice1">Search by Title
                 </div>
         
         
                 <div class="choice2">
         
-                    <input type="radio" name="for_search">Search by Author
+                    <input type="radio" name="for_search" value="choice2">Search by Author
                 </div>
+                <div class="choice3">
         
+                    <input type="radio" name="for_search" value="choice3">Search by Accession Number
+                </div>
         
         
         
@@ -311,29 +333,19 @@
         
             <div class="container3">
                 <div class="add_a_user">
-                    <a href="add_user.html">
+                    <a href="add_user">
                         Add User
                     </a>
                 </div>
         
         
                 <div class="save_button">
-                    <input type="submit" value="Search">
+                    <input type="submit" class="xyz" style="color:black;">
                 </div>
             
                 
         
             </div>
-        
-        
-        
-        
-        
-            
-            
-        
-        
-        
         
             <div class="book_issue">
                 <a href="issue_book">
@@ -352,14 +364,6 @@
                 </a>
             </div>
     
-           
-        
-        
-        
-        
-        
-    
-
         </div>
         
     </form>
@@ -373,11 +377,12 @@
 		<tbody>
             <thead>
                 <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                    <th>Column 3</th>
-                    <th>Column 4</th>
-                    <th>Column 5</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Cupboard No.</th>
+                    <th>Quantity</th>
+                    <th>Is Available</th>
+                    <th>Accession</th>
                 </tr>
             </thead>
 
@@ -396,6 +401,7 @@
 				<td>{{ row[2] }}</td>
 				<td>{{ row[3] }}</td>
 				<td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
 			</tr>
 			 <div class="end">
                 {% endfor %}
